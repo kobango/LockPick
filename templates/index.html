@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Przeglądarka Bazy Danych</title>
+</head>
+<body>
+    <h1>Przeglądarka Bazy Danych</h1>
+    <h2>Tabele</h2>
+    <ul>
+        {% for table_name, columns in tables.items() %}
+            <li><a href="{{ url_for('table_view', table_name=table_name) }}">{{ table_name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

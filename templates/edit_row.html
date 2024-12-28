@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Row</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Edit Row in Table: {{ table_name }}</h1>
+    <form method="post">
+        {% for column in columns %}
+            <label for="{{ column }}">{{ column }}</label>
+            <input type="text" name="{{ column }}" id="{{ column }}" value="{{ row[column] }}">
+            <br>
+        {% endfor %}
+        <button type="submit">Save</button>
+        <a href="{{ url_for('table_view', table_name=table_name) }}">Cancel</a>
+    </form>
+</body>
+</html>

@@ -2,14 +2,16 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Przeglądarka Bazy Danych</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <h1>Przeglądarka Bazy Danych</h1>
     <h2>Tabele</h2>
     <ul>
         {% for table_name, columns in tables.items() %}
-            <li><a href="{{ url_for('table_view', table_name=table_name) }}">{{ table_name }}</a></li>
+            <li><a href="{{ url_for('table_view', table_name=table_name) }}" class="btn">{{ table_name }}</a></li>
         {% endfor %}
     </ul>
 </body>

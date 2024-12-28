@@ -1,26 +1,48 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Dane z tabeli {{ table_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table View</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Dane z tabeli {{ table_name }}</h1>
+    <h1>Table: {{ table_name }}</h1>
     <table border="1">
-        <tr>
-            {% for column in columns %}
-                <th>{{ column }}</th>
-            {% endfor %}
-        </tr>
-        {% for row in data %}
+        <thead>
             <tr>
-                {% for value in row %}
-                    <td>{{ value }}</td>
+                {% for column in columns %}
+                    <th>{{ column }}</th>
                 {% endfor %}
+                <th>Actions</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                <td>
+                    <a href="{{ url_for('edit_row', table_name=table_name, row_id=row[0]) }}" class="btn">Edit</a>
+                </td>
+
+                </tr>
+
+            {% endfor %}
+        </tbody>
     </table>
-    <br>
-    <a href="{{ url_for('index') }}">Powrót do listy tabel</a>
+    <div>
+        <p>Page {{ page }} of {{ total_pages }}</p>
+        {% if page > 1 %}
+            <a href="{{ url_for('table_view', table_name=table_name, page=page - 1) }}" class="btn">Previous</a>
+        {% endif %}
+        {% if page < total_pages %}
+            <a href="{{ url_for('table_view', table_name=table_name, page=page + 1) }}" class="btn">Next</a>
+        {% endif %}
+    </div>
+    <div>
+    <a href="{{ url_for('index') }}" class="btn">Back to Table List</a>
+    </div>
 </body>
 </html>
